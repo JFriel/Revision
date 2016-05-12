@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\title{ABS Notes}
+\author{james.friel4 }
+\date{May 2016}
+
+\begin{document}
+
+\maketitle
+
+\section{Pervasive Trends In Computing}
+\begin{itemize}
+    \item Ubiquity - Cost of processing power decreasing
+    \item Interconnection - System interaction
+    \item Complicity - Elaboration of tasks carried out by computers
+    \item Delegation - Giving control to a computer
+    \item Human-orientation - Increase use of metaphors that better reflect human intuition
+\end{itemize}
+
+\section{What Is an Agent?}
+An agent id anything that can perceive its environment(through its sensors) and act upon that environment(through its effectors)
+
+\section{Environment Classification}
+\begin{itemize}
+    \item Accessible vs Inaccessible
+    \item Deterministic vs Non-deterministic
+    \item Static vs Dynamic
+    \item Episodic vs Non-episodic
+    \item Discrete vs Continuous
+    \item Open Environment
+\end{itemize}
+
+\section{Abstract Agents}
+Run = sequence of interleaved environment states and actions
+$ r: e_0 \rightarrow e_1 \rightarrow e_2 ... e_{u-1}\rightarrow e_u$
+R = {r,r',...} the set of all possible runs
+\subsection{State Transformer Function}
+$\tau: R^{Ac} \rightarrow \varphi(E)
+\tau $maps each run ending with an agent action to the set of possible resulting states
+if $\tau(r) = \theta$ then the system will terminate
+
+Agents are behavioural equivalent if R(Ag1,Env) = R(Ag2,Env).
+
+
+\section{Reactive Agents}
+Bases decisions only on current state.
+Every reactive agent can be mapped to an agent defined on runs( the reverse is not usually true).
+
+Ag: E $\rightarrow$ Ac
+An environment state maps to an agent action.
+
+\section{Perception and Action}
+see:  E: $\rightarrow$ Per
+action:  Per* $\rightarrow Ac$
+Where Per is a non-empty set of perceptions and actions defines decisions based on perceptions.
+Two perceptions are indistinguishable if see(e1) = see(e2)
+
+\section{State Based Agents}
+Think FSM with states:
+see: E \rightarrow Per
+action: I \rightarrow Ac
+next: I x Per \rightarrow I
+
+\section{Utilities}
+Utilites describe "quality" of a state through some numerical value
+u: E $\rightarrow$ R
+This makes the long-term view difficult to account for, can use runs instead
+
+Using utilities we can make optimal agents,
+"An optimal agent is one that maximises expected utility"
+define P(r|Ag,Env) is the probability that a run occurs given an agent, Ag, and an environment, Env.
+So, Ag_{opt} = argmax $\Sigma$ P(r| Ag,Env)u(r)
+
+
+\section{MetateM}
+Concurrent MetateM is based on direct execution of logical formulae.
+Concurrently executing agents communicate via message passing.
+Look up the tutorial with Snow White to get an Idea about this.
+
+\section{Practical Reasoning Agents}
+Reasoning towards actions (deciding what to do)
+\begin{itemize}
+    \item Deliberation: deciding what to do
+    \item Means-end reasoning: deciding how to do it
+\end{itemize}
+Combining these is the foundation of deliberative agency.
+Deliberation generates intentions, Means-end generates plans.
+\subsection{BDI Architecture}
+\begin{itemize}
+    \item Belief Revision Function
+    \item Generate Options
+    \item Filtering Function
+    \item Planning Function
+    \item Action Generator
+\end{itemize}
+
+\section{Subsumption Architecture}
+See Mars Rover Example
+
+\section{InteRRaP}
+InteRRaP: Integrated of rational planning and reactive behaviour
+Has a vertical layering architecture.
+Has 3 layers:
+\begin{itemize}
+    \item Behaviour-base Layer
+    \item Local Planning Layer
+    \item Social Planning Layer
+\end{itemize}
+
+\section{Agent Interaction}
+\begin{itemize}
+    \item Non-/quasi-communicative interaction - shared environment
+    \item Communication - info exchange, collaboration, negotiation
+\end{itemize}
+Most multiagent approaches to communication based on speech act theory,
+consists of Locution, Illocution, Perlocution.
+
+Common communication laguagews are KQML and FIPA
+Look up the exact working of these languages - there's loads
+
+\section{Agent Coordination}
+\subsection{Relationships}
+Positive relationships are between two agents where at least one agent benefits if the plans are combined.
+Requests: Explicitly asking for help with own activities
+
+\subsection{Partial Global Planning}
+PGP: exchange information to reach common conclusion
+Three iterated stages:
+\begin{itemize}
+    \item Agents deliberate locally and generate short-term plans for goal achievement
+    \item They exchange information to determine where plans and goals interact
+    \item Agents alter local plans to better coordinate their activities   
+\end{itemize}
+
+\section{Agent Preferences}
+Preference ordering OxO for agent i is a total, antisymmetric, transitive relation.
+Preferences are often expressed through a utility function.
+\subsection{Game Theory}
+Some games have a dominant strategy equilibrium - all agents have a dominating strategy
+
+\subsection{Nash Equilibrium}
+A join strategy S is said to me a Nash equilibrium if no agent has a incentive to deviate from this strategy combination.
+
+\section{Social Choice}
+\subsection{Preference Aggregation}
+How do we combine a collection of potentially different preference orders in order to derive a group decision?
+Voters submit orderings of preferences, the outcome that appears first in most orderings wins.
+
+Condorcet’s Paradox:
+There are scenarios in which no matter which outcome we choose the majority of voters will be unhappy with the outcome chosen
+
+\subsection{Borda Count}
+only top-ranked candidate taken into account, rest of orderings disregarded.
+Borda count looks at entire preference ordering, counts the strength of opinion in favour of a candidate
+
+\section{Coalitions}
+The three stages of Cooperative action:
+\begin{itemize}
+    \item Coalition structure generation
+    \item Solving the optimisation problem of each coalition
+    \item Dividing the value of the solution of each coalition
+\end{itemize}
+The core of a coalitional game is the set of outcomes that no sub-coalition can object to.
+
+\subsection{Shapley Value}
+\begin{itemize}
+\item Symmetry: if two agents contribute the same they should receive the same pay-off (they are interchangeable)
+\item Dummy player: agents that do not add value to any coalition should get what they earn on their own
+\item Additivity: if two games are combined, the value a player gets should be the sum of the values it gets in individual games
+\end{itemize}
+$sh_i = \frac{1}{|Ag|!}\Sigma_o  \varepsilon \pi(Ag) \mu i^{C_i(o)}$
+
+\section{Auctions}
+\begin{itemize}
+\item English
+\item Dutch
+\item Vickrey
+\end{itemize}
+
+\section{Bargaining}
+I'll get back to this
+
+\section{Argumentation}
+...
+\end{document}
+
